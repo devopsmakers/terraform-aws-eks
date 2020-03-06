@@ -8,12 +8,6 @@
 - {{ if .Scope }}**{{ .Scope }}:** {{ end }}[{{ .Hash.Short }}]({{ $.Info.RepositoryURL }}/commit/{{ .Hash.Short }}) {{ .Subject }}
 {{ end -}}
 {{ end }}
-#### 🔮 Other Commits
-{{ range .Unreleased.Commits -}}
-{{ if not .Subject -}}
-- {{ if .Scope }}**{{ .Scope }}:** {{ end }}[{{ .Hash.Short }}]({{ $.Info.RepositoryURL }}/commit/{{ .Hash.Short }}) {{ .Header }}
-{{ end -}}
-{{ end -}}
 {{ end -}}
 {{ range .Versions }}
 <a name="{{ .Tag.Name }}"></a>
@@ -26,12 +20,6 @@
 {{ end }}
 {{ end -}}
 {{ end -}}
-#### 🔮 Other Commits
-{{ range .Commits -}}
-{{ if not .Subject -}}
-- {{ if .Scope }}**{{ .Scope }}:** {{ end }}[{{ .Hash.Short }}]({{ $.Info.RepositoryURL }}/commit/{{ .Hash.Short }}) {{ .Header }}
-{{ end -}}
-{{ end }}
 
 {{- if .NoteGroups }}
 {{ range .NoteGroups -}}
