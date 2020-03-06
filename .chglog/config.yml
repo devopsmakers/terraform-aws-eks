@@ -2,7 +2,7 @@ style: github
 template: CHANGELOG.tpl.md
 info:
   title: CHANGELOG
-  repository_url: https://github.com/JSainsburyPLC/terraform-aws-eks
+  repository_url: https://github.com/devopsmakers/terraform-aws-eks
 options:
   commit_groups:
     title_maps:
