@@ -11,7 +11,7 @@ The interface to the module is the same but it attempts to be more flexible
 by allowing users to create and use components separately by splitting out
 sub-modules for:
 - EKS Control Plane
-- EKS Worker Nodes
+- EKS Worker Groups
 - EKS Managed Node Groups
 
 The submodules are designed to be used as individual modules to help the user
