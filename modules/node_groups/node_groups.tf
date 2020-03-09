@@ -60,25 +60,25 @@ resource "aws_iam_role" "node_groups" {
   tags                  = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "workers_AmazonEKSWorkerNodePolicy" {
+resource "aws_iam_role_policy_attachment" "node_groups_AmazonEKSWorkerNodePolicy" {
   count      = var.manage_node_groups_iam_resources && var.create_eks ? 1 : 0
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = aws_iam_role.node_groups[0].name
 }
 
-resource "aws_iam_role_policy_attachment" "workers_AmazonEKS_CNI_Policy" {
+resource "aws_iam_role_policy_attachment" "node_groups_AmazonEKS_CNI_Policy" {
   count      = var.manage_node_groups_iam_resources && var.attach_node_groups_cni_policy && var.create_eks ? 1 : 0
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
   role       = aws_iam_role.node_groups[0].name
 }
 
-resource "aws_iam_role_policy_attachment" "workers_AmazonEC2ContainerRegistryReadOnly" {
+resource "aws_iam_role_policy_attachment" "node_groups_AmazonEC2ContainerRegistryReadOnly" {
   count      = var.manage_node_groups_iam_resources && var.create_eks ? 1 : 0
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.node_groups[0].name
 }
 
-resource "aws_iam_role_policy_attachment" "workers_additional_policies" {
+resource "aws_iam_role_policy_attachment" "node_groups_additional_policies" {
   count      = var.manage_node_groups_iam_resources && var.create_eks ? length(var.node_groups_additional_policies) : 0
   role       = aws_iam_role.node_groups[0].name
   policy_arn = var.node_groups_additional_policies[count.index]
