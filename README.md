@@ -13,6 +13,7 @@ sub-modules for:
 - EKS Control Plane
 - EKS Worker Groups
 - EKS Managed Node Groups
+- `aws-auth` Configuration
 
 The submodules are designed to be used as individual modules to help the user
 perform actions in between creating the control plane and creating workers and nodes
