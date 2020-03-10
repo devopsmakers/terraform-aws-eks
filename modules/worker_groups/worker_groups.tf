@@ -14,18 +14,21 @@ resource "aws_autoscaling_group" "worker_groups" {
     )
   )
 
-  desired_capacity        = each.value["desired_capacity"]
-  max_size                = each.value["max_size"]
-  min_size                = each.value["min_size"]
-  force_delete            = each.value["force_delete"]
-  target_group_arns       = each.value["target_group_arns"]
-  service_linked_role_arn = each.value["service_linked_role_arn"]
-  vpc_zone_identifier     = each.value["subnets"]
-  protect_from_scale_in   = each.value["protect_from_scale_in"]
-  suspended_processes     = each.value["suspended_processes"]
-  enabled_metrics         = each.value["enabled_metrics"]
-  placement_group         = each.value["placement_group"]
-  termination_policies    = each.value["termination_policies"]
+  desired_capacity          = each.value["desired_capacity"]
+  max_size                  = each.value["max_size"]
+  min_size                  = each.value["min_size"]
+  force_delete              = each.value["force_delete"]
+  target_group_arns         = each.value["target_group_arns"]
+  service_linked_role_arn   = each.value["service_linked_role_arn"]
+  vpc_zone_identifier       = each.value["subnets"]
+  protect_from_scale_in     = each.value["protect_from_scale_in"]
+  suspended_processes       = each.value["suspended_processes"]
+  enabled_metrics           = each.value["enabled_metrics"]
+  placement_group           = each.value["placement_group"]
+  termination_policies      = each.value["termination_policies"]
+  max_instance_lifetime     = each.value["max_instance_lifetime"]
+  default_cooldown          = each.value["default_cooldown"]
+  health_check_grace_period = each.value["health_check_grace_period"]
 
   dynamic "mixed_instances_policy" {
     iterator = item

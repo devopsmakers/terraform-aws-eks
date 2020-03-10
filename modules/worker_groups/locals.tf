@@ -22,6 +22,8 @@ locals {
     force_delete                  = false                     # Enable forced deletion for the autoscaling group.
     initial_lifecycle_hooks       = []                        # Initital lifecycle hook for the autoscaling group.
     recreate_on_change            = false                     # Recreate the autoscaling group when the Launch Template or Launch Configuration change.
+    default_cooldown              = null                      # The amount of time, in seconds, after a scaling activity completes before another scaling activity can start.
+    health_check_grace_period     = null                      # Time in seconds after instance comes into service before checking health.
     instance_type                 = "m4.large"                # Size of the workers instances.
     spot_price                    = ""                        # Cost of spot instance.
     placement_tenancy             = ""                        # The tenancy of the instance. Valid values are "default" or "dedicated".
@@ -50,6 +52,7 @@ locals {
     service_linked_role_arn       = ""                        # Arn of custom service linked role that Auto Scaling group will use. Useful when you have encrypted EBS
     termination_policies          = []                        # A list of policies to decide how the instances in the auto scale group should be terminated.
     platform                      = "linux"                   # Platform of workers. either "linux" or "windows"
+    max_instance_lifetime         = 0                         # Maximum number of seconds instances can run in the ASG. 0 is unlimited.
     # Settings for launch templates
     root_block_device_name            = data.aws_ami.eks_worker.root_device_name # Root device name for workers. If non is provided, will assume default AMI was used.
     root_kms_key_id                   = ""                                       # The KMS key to use when encrypting the root storage device

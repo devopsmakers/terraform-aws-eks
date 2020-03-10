@@ -7,7 +7,7 @@ This is a complete rework of the upstream community EKS module: https://github.c
 > :warning: **Only `Terraform >= 0.12` will be supported. Based on `v9.0.0` of the upstream module.**
 
 
-The interface to the module is the same but it attempts to be more flexible
+The interface to the module is ~the same~ similar, but it attempts to be more flexible
 by allowing users to create and use components separately by splitting out
 sub-modules for:
 - EKS Control Plane
