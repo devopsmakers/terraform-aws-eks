@@ -4,8 +4,7 @@
 
 This is a complete rework of the upstream community EKS module: https://github.com/terraform-aws-modules/terraform-aws-eks
 
-> :warning: **Only `Terraform >= 0.12` will be supported. Based on `v9.0.0` of the upstream module.**
-
+> :warning: **Only `Terraform >= 0.12` will be supported. Based on `v9.0.x` of the upstream module.**
 
 The interface to the module is ~the same~ similar, but it attempts to be more flexible
 by allowing users to create and use components separately by splitting out
@@ -24,6 +23,46 @@ reduce tight coupling of control plane and worker nodes whilst maintaining the s
 interface for seamless migration to this module. The interface has become an example
 implementation of the sub-modules.
 
+## :alert: Major Changes
+There are some core implementation changes from the original `eks` module:
+
+1. Launch Configuration support removed in favour of Launch Template driven
+   `worker_groups` sub-module. They were doing the same things with no benefit to
+   supporting both LC's and LT's. `worker_groups_launch_template` has been dropped
+   but `worker_groups` now creates LT's.
+
+2. Simplified code through merging defaults. A pattern was used in the `node_groups`
+   sub-module which I really liked. Merging the default local, default variable and
+   and each map values:
+   ```
+   # Merge defaults and per-group values to make code cleaner
+   worker_groups_expanded = { for k, v in var.worker_groups : k => merge(
+     local.worker_groups_defaults,
+     var.worker_groups_defaults,
+     v,
+   ) if var.create_eks }
+   ```
+
+   It means that code moves from this:
+   ```
+   enabled_metrics = lookup(
+     var.worker_groups[count.index],
+     "enabled_metrics",
+     local.workers_group_defaults["enabled_metrics"]
+   )
+   ```
+
+   To this:
+   ```
+   enabled_metrics = each.value["enabled_metrics"]
+   ```
+3. Enabling a map of maps for `worker_groups`. By passing in a map of maps we can
+   add and remove `worker_groups` without affecting the existing resources.
+   A list of maps still works with all of the issues when removing objects from the list.
+
+   With the sub-module approach, there's nothing stopping a user from using a module
+   instance per worker_group further isolating the data structures in the state file.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Providers
 
@@ -33,8 +72,8 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| attach\_node\_groups\_cni\_policy | Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster. | `bool` | `true` | no |
-| attach\_worker\_groups\_cni\_policy | Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster. | `bool` | `true` | no |
+| attach\_node\_cni\_policy | Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster. | `bool` | `true` | no |
+| attach\_worker\_cni\_policy | Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster. | `bool` | `true` | no |
 | cluster\_create\_security\_group | Whether to create a security group for the cluster or attach the cluster to `cluster_security_group_id`. | `bool` | `true` | no |
 | cluster\_create\_timeout | Timeout value when creating the EKS cluster. | `string` | `"30m"` | no |
 | cluster\_delete\_timeout | Timeout value when deleting the EKS cluster. | `string` | `"15m"` | no |
@@ -60,8 +99,8 @@ No provider.
 | kubeconfig\_name | Override the default name used for items kubeconfig. | `string` | `""` | no |
 | manage\_aws\_auth | Whether to apply the aws-auth configmap file. | `bool` | `true` | no |
 | manage\_cluster\_iam\_resources | Whether to let the module manage cluster IAM resources. If set to false, cluster\_iam\_role\_name must be specified. | `bool` | `true` | no |
-| manage\_node\_groups\_iam\_resources | Whether to let the module manage worker IAM resources. If set to false, iam\_instance\_profile\_name must be specified for workers. | `bool` | `true` | no |
-| manage\_worker\_groups\_iam\_resources | Whether to let the module manage worker IAM resources. If set to false, iam\_instance\_profile\_name must be specified for workers. | `bool` | `true` | no |
+| manage\_node\_iam\_resources | Whether to let the module manage worker IAM resources. If set to false, iam\_instance\_profile\_name must be specified for workers. | `bool` | `true` | no |
+| manage\_worker\_iam\_resources | Whether to let the module manage worker IAM resources. If set to false, iam\_instance\_profile\_name must be specified for workers. | `bool` | `true` | no |
 | map\_accounts | Additional AWS account numbers to add to the aws-auth configmap. See examples/basic/variables.tf for example format. | `list(string)` | `[]` | no |
 | map\_roles | Additional IAM roles to add to the aws-auth configmap. See examples/basic/variables.tf for example format. | <pre>list(object({<br>    rolearn  = string<br>    username = string<br>    groups   = list(string)<br>  }))</pre> | `[]` | no |
 | map\_users | Additional IAM users to add to the aws-auth configmap. See examples/basic/variables.tf for example format. | <pre>list(object({<br>    userarn  = string<br>    username = string<br>    groups   = list(string)<br>  }))</pre> | `[]` | no |

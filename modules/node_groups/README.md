@@ -35,11 +35,11 @@ This submodule is designed for use by both the parent `eks` module and by the us
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| attach\_node\_groups\_cni\_policy | Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default node groups IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster. | `bool` | `true` | no |
+| attach\_node\_cni\_policy | Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default node groups IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster. | `bool` | `true` | no |
 | cluster\_name | Name of parent cluster. | `string` | n/a | yes |
 | create\_eks | Controls if EKS resources should be created (it affects almost all resources). | `bool` | `true` | no |
 | iam\_path | If provided, all IAM roles will be created on this path. | `string` | `"/"` | no |
-| manage\_node\_groups\_iam\_resources | Whether to let the module manage node group IAM resources. If set to false, iam\_instance\_profile\_name must be specified for workers. | `bool` | `true` | no |
+| manage\_node\_iam\_resources | Whether to let the module manage node group IAM resources. If set to false, iam\_instance\_profile\_name must be specified for workers. | `bool` | `true` | no |
 | node\_groups | Map of map of node groups to create. See documentation above for more details. | `any` | `{}` | no |
 | node\_groups\_additional\_policies | Additional policies to be added to node groups. | `list(string)` | `[]` | no |
 | node\_groups\_defaults | Map of values to be applied to all node groups. See documentation above for more details. | `any` | `{}` | no |

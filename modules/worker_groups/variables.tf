@@ -31,12 +31,6 @@ variable "subnets" {
   type        = list(string)
 }
 
-variable "manage_worker_groups_iam_resources" {
-  description = "Whether to let the module manage node group IAM resources. If set to false, iam_instance_profile_name must be specified for workers."
-  type        = bool
-  default     = true
-}
-
 variable "worker_groups_role_name" {
   description = "User defined node groups role name."
   type        = string
@@ -55,7 +49,7 @@ variable "iam_path" {
   default     = "/"
 }
 
-variable "attach_worker_groups_cni_policy" {
+variable "attach_worker_cni_policy" {
   description = "Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default node groups IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster."
   type        = bool
   default     = true

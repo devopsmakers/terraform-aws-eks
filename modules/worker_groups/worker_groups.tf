@@ -119,7 +119,7 @@ resource "aws_launch_template" "worker_groups" {
     associate_public_ip_address = each.value["public_ip"]
     delete_on_termination       = each.value["eni_delete"]
     security_groups = flatten([
-      aws_security_group.worker_groups[each.key].id,
+      try(aws_security_group.worker_groups[each.key].id, ""),
       var.worker_additional_security_group_ids,
       each.value["additional_security_group_ids"],
     ])
@@ -203,14 +203,15 @@ resource "aws_launch_template" "worker_groups" {
 }
 
 resource "aws_iam_instance_profile" "worker_groups" {
-  for_each    = local.worker_groups_expanded_for_iam_resource
+  for_each = var.manage_worker_iam_resources ? local.worker_groups_expanded : {}
+
   name_prefix = "${var.cluster_name}-${coalesce(each.value["name"], each.key)}"
   role        = each.value["iam_role_id"]
   path        = var.iam_path
 }
 
 resource "aws_security_group" "worker_groups" {
-  for_each = local.worker_groups_expanded_for_sg
+  for_each = var.worker_create_security_group ? local.worker_groups_expanded : {}
 
   name_prefix = "${var.cluster_name}-${coalesce(each.value["name"], each.key)}"
   description = "Security group for ${coalesce(each.value["name"], each.key)} workers in the cluster."
@@ -225,7 +226,7 @@ resource "aws_security_group" "worker_groups" {
 }
 
 resource "aws_security_group_rule" "workers_egress_internet" {
-  for_each = local.worker_groups_expanded_for_sg
+  for_each = var.worker_create_security_group ? local.worker_groups_expanded : {}
 
   description       = "Allow workers ${coalesce(each.value["name"], each.key)} egress to the Internet."
   protocol          = "-1"
@@ -237,7 +238,7 @@ resource "aws_security_group_rule" "workers_egress_internet" {
 }
 
 resource "aws_security_group_rule" "workers_ingress_self" {
-  for_each = local.worker_groups_expanded_for_sg
+  for_each = var.worker_create_security_group ? local.worker_groups_expanded : {}
 
   description              = "Allow ${coalesce(each.value["name"], each.key)} workers to communicate with each other."
   protocol                 = "-1"
@@ -249,7 +250,7 @@ resource "aws_security_group_rule" "workers_ingress_self" {
 }
 
 resource "aws_security_group_rule" "workers_ingress_cluster" {
-  for_each = local.worker_groups_expanded_for_sg
+  for_each = var.worker_create_security_group ? local.worker_groups_expanded : {}
 
   description              = "Allow ${coalesce(each.value["name"], each.key)} workers to receive communication from the cluster control plane."
   protocol                 = "tcp"
@@ -261,7 +262,7 @@ resource "aws_security_group_rule" "workers_ingress_cluster" {
 }
 
 resource "aws_security_group_rule" "workers_ingress_cluster_kubelet" {
-  for_each = local.worker_groups_expanded_for_sg
+  for_each = var.worker_create_security_group ? local.worker_groups_expanded : {}
 
   description              = "Allow ${coalesce(each.value["name"], each.key)} worker Kubelets to receive communication from the cluster control plane."
   protocol                 = "tcp"
@@ -273,7 +274,7 @@ resource "aws_security_group_rule" "workers_ingress_cluster_kubelet" {
 }
 
 resource "aws_security_group_rule" "cluster_https_worker_ingress" {
-  for_each = local.worker_groups_expanded_for_sg
+  for_each = var.worker_create_security_group ? local.worker_groups_expanded : {}
 
   description              = "Allow ${coalesce(each.value["name"], each.key)} workers to communicate with the EKS cluster API."
   protocol                 = "tcp"
@@ -302,7 +303,7 @@ resource "aws_iam_role_policy_attachment" "workers_AmazonEKSWorkerNodePolicy" {
 }
 
 resource "aws_iam_role_policy_attachment" "workers_AmazonEKS_CNI_Policy" {
-  count      = var.manage_worker_iam_resources && var.attach_worker_groups_cni_policy && var.create_eks ? 1 : 0
+  count      = var.manage_worker_iam_resources && var.attach_worker_cni_policy && var.create_eks ? 1 : 0
   policy_arn = "${local.policy_arn_prefix}/AmazonEKS_CNI_Policy"
   role       = aws_iam_role.worker_groups[0].name
 }

@@ -80,7 +80,7 @@ data "template_file" "launch_template_userdata" {
 }
 
 data "aws_iam_instance_profile" "custom_worker_group_launch_template_iam_instance_profile" {
-  for_each = local.worker_groups_expanded_for_iam_data
+  for_each = var.manage_worker_iam_resources ? {} : local.worker_groups_expanded
 
   name = each.value["iam_instance_profile_name"]
 }

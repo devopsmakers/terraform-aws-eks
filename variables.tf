@@ -270,13 +270,13 @@ variable "cluster_iam_role_name" {
   default     = ""
 }
 
-variable "manage_worker_groups_iam_resources" {
+variable "manage_worker_iam_resources" {
   description = "Whether to let the module manage worker IAM resources. If set to false, iam_instance_profile_name must be specified for workers."
   type        = bool
   default     = true
 }
 
-variable "manage_node_groups_iam_resources" {
+variable "manage_node_iam_resources" {
   description = "Whether to let the module manage worker IAM resources. If set to false, iam_instance_profile_name must be specified for workers."
   type        = bool
   default     = true
@@ -294,13 +294,13 @@ variable "node_groups_role_name" {
   default     = ""
 }
 
-variable "attach_worker_groups_cni_policy" {
+variable "attach_worker_cni_policy" {
   description = "Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster."
   type        = bool
   default     = true
 }
 
-variable "attach_node_groups_cni_policy" {
+variable "attach_node_cni_policy" {
   description = "Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster."
   type        = bool
   default     = true

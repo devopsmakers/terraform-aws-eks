@@ -38,10 +38,10 @@ module "worker_groups" {
   cluster_name              = module.control_plane.cluster_id
   cluster_security_group_id = module.control_plane.cluster_security_group_id
 
-  attach_worker_groups_cni_policy       = var.attach_worker_groups_cni_policy
+  attach_worker_cni_policy              = var.attach_worker_cni_policy
   create_eks                            = var.create_eks
   iam_path                              = var.iam_path
-  manage_worker_groups_iam_resources    = var.manage_worker_groups_iam_resources
+  manage_worker_iam_resources           = var.manage_worker_iam_resources
   permissions_boundary                  = var.permissions_boundary
   subnets                               = var.subnets
   tags                                  = var.tags
@@ -66,17 +66,17 @@ module "node_groups" {
 
   cluster_name = module.control_plane.cluster_id
 
-  attach_node_groups_cni_policy    = var.attach_node_groups_cni_policy
-  create_eks                       = var.create_eks
-  iam_path                         = var.iam_path
-  manage_node_groups_iam_resources = var.manage_node_groups_iam_resources
-  node_groups                      = var.node_groups
-  node_groups_additional_policies  = var.node_groups_additional_policies
-  node_groups_defaults             = var.node_groups_defaults
-  node_groups_role_name            = var.node_groups_role_name
-  permissions_boundary             = var.permissions_boundary
-  subnets                          = var.subnets
-  tags                             = var.tags
+  attach_node_cni_policy          = var.attach_node_cni_policy
+  create_eks                      = var.create_eks
+  iam_path                        = var.iam_path
+  manage_node_iam_resources       = var.manage_node_iam_resources
+  node_groups                     = var.node_groups
+  node_groups_additional_policies = var.node_groups_additional_policies
+  node_groups_defaults            = var.node_groups_defaults
+  node_groups_role_name           = var.node_groups_role_name
+  permissions_boundary            = var.permissions_boundary
+  subnets                         = var.subnets
+  tags                            = var.tags
 }
 
 module "aws_auth" {

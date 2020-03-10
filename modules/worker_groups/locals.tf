@@ -80,11 +80,7 @@ locals {
     v,
   ) if var.create_eks }
 
-  worker_groups_expanded_for_sg = var.worker_create_security_group ? local.worker_groups_expanded : {}
-  worker_security_group_id      = var.worker_create_security_group ? join("", values(aws_security_group.worker_groups).*.id) : var.worker_security_group_id
-
-  worker_groups_expanded_for_iam_resource = var.manage_worker_iam_resources ? local.worker_groups_expanded : {}
-  worker_groups_expanded_for_iam_data     = var.manage_worker_iam_resources ? {} : local.worker_groups_expanded
+  worker_security_group_id = var.worker_create_security_group ? join("", values(aws_security_group.worker_groups).*.id) : var.worker_security_group_id
 
   policy_arn_prefix = contains(["cn-northwest-1", "cn-north-1"], data.aws_region.current.name) ? "arn:aws-cn:iam::aws:policy" : "arn:aws:iam::aws:policy"
 
