@@ -23,7 +23,7 @@ reduce tight coupling of control plane and worker nodes whilst maintaining the s
 interface for seamless migration to this module. The interface has become an example
 implementation of the sub-modules.
 
-## :alert: Major Changes
+## :skull_and_crossbones: Major Changes
 There are some core implementation changes from the original `eks` module:
 
 1. Launch Configuration support removed in favour of Launch Template driven
