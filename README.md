@@ -27,13 +27,13 @@ implementation of the sub-modules.
 There are some core implementation changes from the original `eks` module:
 
 1. Launch Configuration support removed in favour of Launch Template driven
-   `worker_groups` sub-module. They were doing the same things with no benefit to
-   supporting both LC's and LT's. `worker_groups_launch_template` has been dropped
-   but `worker_groups` now creates LT's.
+   `worker_groups` sub-module. They're doing the same things with no benefit to
+   supporting both LC's and LT's (to my current knowledge). `worker_groups_launch_template` has been dropped
+   and `worker_groups` now creates LT's.
 
-2. Simplified code through merging defaults. A pattern was used in the `node_groups`
-   sub-module which I really liked. Merging the default local, default variable and
-   and each map values:
+2. Simplified code through merging defaults. A pattern I saw in the `node_groups`
+   sub-module which I really liked. Merging the defaults local, defaults variable and
+   and map values:
    ```
    # Merge defaults and per-group values to make code cleaner
    worker_groups_expanded = { for k, v in var.worker_groups : k => merge(
