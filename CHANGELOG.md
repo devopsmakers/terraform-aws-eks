@@ -3,16 +3,7 @@
 ## [Unreleased]
 
 <a name="v10.0.0"></a>
-## [v10.0.0] - 0001-01-01
-
-<a name="v9.0.2"></a>
-## [v9.0.2] - 2020-03-10
-### 🔧 Maintenance
-- **release:** [565ab90](https://github.com/devopsmakers/terraform-aws-eks/commit/565ab90) Update changelog for v9.0.2
-
-
-<a name="v9.0.2-js"></a>
-## v9.0.2-js - 2020-03-10
+## [v10.0.0] - 2020-03-10
 ### ✨ Features
 - [1db1d2a](https://github.com/devopsmakers/terraform-aws-eks/commit/1db1d2a) Add worker groups submodules
 - [392ecfd](https://github.com/devopsmakers/terraform-aws-eks/commit/392ecfd) Enable management of the aws-auth ConfigMap as a module
@@ -25,9 +16,15 @@
 ### 🔧 Maintenance
 - [f2a4434](https://github.com/devopsmakers/terraform-aws-eks/commit/f2a4434) Add initial submodule files
 - [05b7d54](https://github.com/devopsmakers/terraform-aws-eks/commit/05b7d54) Update README with intention
+- **release:** [df29db6](https://github.com/devopsmakers/terraform-aws-eks/commit/df29db6) Update changelog for v10.0.0
+- **release:** [565ab90](https://github.com/devopsmakers/terraform-aws-eks/commit/565ab90) Update changelog for v9.0.2
+
+
+<a name="v9.1.0"></a>
+## v9.1.0 - 2020-03-06
+### 🔧 Maintenance
 - [6338f6d](https://github.com/devopsmakers/terraform-aws-eks/commit/6338f6d) Initial commit
 
 
 [Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.0...HEAD
-[v10.0.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v9.0.2...v10.0.0
-[v9.0.2]: https://github.com/devopsmakers/terraform-aws-eks/compare/v9.0.2-js...v9.0.2
+[v10.0.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v9.1.0...v10.0.0
