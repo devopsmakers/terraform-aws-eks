@@ -141,14 +141,10 @@ resource "aws_launch_template" "worker_groups" {
     data.template_file.launch_template_userdata[each.key].rendered,
   )
 
-  ebs_optimized = lookup(
-    each.value,
-    "ebs_optimized",
-    ! contains(
-      local.ebs_optimized_not_supported,
-      each.value["instance_type"]
-    )
-  )
+  ebs_optimized = contains(
+    local.ebs_optimized_not_supported,
+    each.value["instance_type"]
+  ) ? false : each.value["ebs_optimized"]
 
   credit_specification {
     cpu_credits = each.value["cpu_credits"]

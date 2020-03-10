@@ -64,13 +64,13 @@ locals {
     cpu_credits                       = "standard"                               # T2/T3 unlimited mode, can be 'standard' or 'unlimited'. Used 'standard' mode as default to avoid paying higher costs
     market_type                       = null
     # Settings for launch templates with mixed instances policy
-    override_instance_types                  = ["m5.large", "m5a.large", "m5d.large", "m5ad.large"] # A list of override instance types for mixed instances policy
-    on_demand_allocation_strategy            = null                                                 # Strategy to use when launching on-demand instances. Valid values: prioritized.
-    on_demand_base_capacity                  = "0"                                                  # Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances
-    on_demand_percentage_above_base_capacity = "0"                                                  # Percentage split between on-demand and Spot instances above the base on-demand capacity
-    spot_allocation_strategy                 = "lowest-price"                                       # Valid options are 'lowest-price' and 'capacity-optimized'. If 'lowest-price', the Auto Scaling group launches instances using the Spot pools with the lowest price, and evenly allocates your instances across the number of Spot pools. If 'capacity-optimized', the Auto Scaling group launches instances using Spot pools that are optimally chosen based on the available Spot capacity.
-    spot_instance_pools                      = 10                                                   # "Number of Spot pools per availability zone to allocate capacity. EC2 Auto Scaling selects the cheapest Spot pools and evenly allocates Spot capacity across the number of Spot pools that you specify."
-    spot_max_price                           = ""                                                   # Maximum price per unit hour that the user is willing to pay for the Spot instances. Default is the on-demand price
+    override_instance_types                  = []             # A list of override instance types for mixed instances policy
+    on_demand_allocation_strategy            = null           # Strategy to use when launching on-demand instances. Valid values: prioritized.
+    on_demand_base_capacity                  = "0"            # Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances
+    on_demand_percentage_above_base_capacity = "0"            # Percentage split between on-demand and Spot instances above the base on-demand capacity
+    spot_allocation_strategy                 = "lowest-price" # Valid options are 'lowest-price' and 'capacity-optimized'. If 'lowest-price', the Auto Scaling group launches instances using the Spot pools with the lowest price, and evenly allocates your instances across the number of Spot pools. If 'capacity-optimized', the Auto Scaling group launches instances using Spot pools that are optimally chosen based on the available Spot capacity.
+    spot_instance_pools                      = 10             # "Number of Spot pools per availability zone to allocate capacity. EC2 Auto Scaling selects the cheapest Spot pools and evenly allocates Spot capacity across the number of Spot pools that you specify."
+    spot_max_price                           = ""             # Maximum price per unit hour that the user is willing to pay for the Spot instances. Default is the on-demand price
   }
 
   # Merge defaults and per-group values to make code cleaner
