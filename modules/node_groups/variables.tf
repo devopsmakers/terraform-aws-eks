@@ -27,12 +27,12 @@ variable "node_groups" {
 }
 
 variable "subnets" {
-  description = "A list of subnets to place the EKS cluster and workers within."
+  description = "A list of subnets to place the EKS cluster and nodes within."
   type        = list(string)
 }
 
 variable "manage_node_iam_resources" {
-  description = "Whether to let the module manage node group IAM resources. If set to false, iam_instance_profile_name must be specified for workers."
+  description = "Whether to let the module manage node group IAM resources. If set to false, iam_instance_profile_name must be specified for nodes."
   type        = bool
   default     = true
 }

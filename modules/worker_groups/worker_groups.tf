@@ -108,6 +108,12 @@ resource "aws_autoscaling_group" "worker_groups" {
     create_before_destroy = true
     ignore_changes        = [desired_capacity]
   }
+
+  depends_on = [
+    aws_iam_role_policy_attachment.workers_AmazonEKSWorkerNodePolicy,
+    aws_iam_role_policy_attachment.workers_AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.workers_AmazonEC2ContainerRegistryReadOnly,
+  ]
 }
 
 resource "aws_launch_template" "worker_groups" {

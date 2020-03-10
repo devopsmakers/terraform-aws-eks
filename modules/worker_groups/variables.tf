@@ -15,7 +15,7 @@ variable "tags" {
 }
 
 variable "worker_groups_defaults" {
-  description = "Map of values to be applied to all node groups. See documentation above for more details."
+  description = "Map of values to be applied to all worker groups. See documentation above for more details."
   type        = any
   default     = {}
 }
@@ -32,7 +32,7 @@ variable "subnets" {
 }
 
 variable "worker_groups_role_name" {
-  description = "User defined node groups role name."
+  description = "User defined worker groups role name."
   type        = string
   default     = ""
 }
@@ -50,13 +50,13 @@ variable "iam_path" {
 }
 
 variable "attach_worker_cni_policy" {
-  description = "Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default node groups IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster."
+  description = "Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker groups IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-worker` DaemonSet pods via another method or workers will not be able to join the cluster."
   type        = bool
   default     = true
 }
 
 variable "worker_groups_additional_policies" {
-  description = "Additional policies to be added to node groups."
+  description = "Additional policies to be added to worker groups."
   type        = list(string)
   default     = []
 }

@@ -39,13 +39,13 @@ This submodule is designed for use by both the parent `eks` module and by the us
 | cluster\_name | Name of parent cluster. | `string` | n/a | yes |
 | create\_eks | Controls if EKS resources should be created (it affects almost all resources). | `bool` | `true` | no |
 | iam\_path | If provided, all IAM roles will be created on this path. | `string` | `"/"` | no |
-| manage\_node\_iam\_resources | Whether to let the module manage node group IAM resources. If set to false, iam\_instance\_profile\_name must be specified for workers. | `bool` | `true` | no |
+| manage\_node\_iam\_resources | Whether to let the module manage node group IAM resources. If set to false, iam\_instance\_profile\_name must be specified for nodes. | `bool` | `true` | no |
 | node\_groups | Map of map of node groups to create. See documentation above for more details. | `any` | `{}` | no |
 | node\_groups\_additional\_policies | Additional policies to be added to node groups. | `list(string)` | `[]` | no |
 | node\_groups\_defaults | Map of values to be applied to all node groups. See documentation above for more details. | `any` | `{}` | no |
 | node\_groups\_role\_name | User defined node groups role name. | `string` | `""` | no |
 | permissions\_boundary | If provided, all IAM roles will be created with this permissions boundary attached. | `string` | n/a | yes |
-| subnets | A list of subnets to place the EKS cluster and workers within. | `list(string)` | n/a | yes |
+| subnets | A list of subnets to place the EKS cluster and nodes within. | `list(string)` | n/a | yes |
 | tags | A map of tags to add to all resources. | `map(string)` | n/a | yes |
 
 ## Outputs

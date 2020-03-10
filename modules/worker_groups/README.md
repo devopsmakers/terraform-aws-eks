@@ -19,7 +19,7 @@ This submodule is designed for use by both the parent `eks` module and by the us
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| attach\_worker\_cni\_policy | Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default node groups IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster. | `bool` | `true` | no |
+| attach\_worker\_cni\_policy | Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker groups IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-worker` DaemonSet pods via another method or workers will not be able to join the cluster. | `bool` | `true` | no |
 | cluster\_name | Name of parent cluster. | `string` | n/a | yes |
 | cluster\_security\_group\_id | If provided, the EKS cluster will be attached to this security group. If not given, a security group will be created with necessary ingress/egress to work with the workers | `string` | n/a | yes |
 | create\_eks | Controls if EKS resources should be created (it affects almost all resources). | `bool` | `true` | no |
@@ -37,9 +37,9 @@ This submodule is designed for use by both the parent `eks` module and by the us
 | worker\_create\_initial\_lifecycle\_hooks | Whether to create initial lifecycle hooks provided in worker groups. | `bool` | `false` | no |
 | worker\_create\_security\_group | Whether to create a security group for the workers or attach the workers to `worker_security_group_id`. | `bool` | `true` | no |
 | worker\_groups | Map of map of worker groups to create. See documentation above for more details. | `any` | `{}` | no |
-| worker\_groups\_additional\_policies | Additional policies to be added to node groups. | `list(string)` | `[]` | no |
-| worker\_groups\_defaults | Map of values to be applied to all node groups. See documentation above for more details. | `any` | `{}` | no |
-| worker\_groups\_role\_name | User defined node groups role name. | `string` | `""` | no |
+| worker\_groups\_additional\_policies | Additional policies to be added to worker groups. | `list(string)` | `[]` | no |
+| worker\_groups\_defaults | Map of values to be applied to all worker groups. See documentation above for more details. | `any` | `{}` | no |
+| worker\_groups\_role\_name | User defined worker groups role name. | `string` | `""` | no |
 | worker\_security\_group\_id | If provided, all workers will be attached to this security group. If not given, a security group will be created with necessary ingress/egress to work with the EKS cluster. | `string` | `""` | no |
 | worker\_sg\_ingress\_from\_port | Minimum port number from which pods will accept communication. Must be changed to a lower value if some pods in your cluster will expose a port lower than 1025 (e.g. 22, 80, or 443). | `number` | `1025` | no |
 | workers\_additional\_policies | Additional policies to be added to workers | `list(string)` | `[]` | no |
