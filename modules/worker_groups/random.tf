@@ -5,7 +5,7 @@ resource "random_pet" "worker_groups" {
   length    = 2
 
   keepers = {
-    ami_id           = lookup(each.value, "ami_id", null)
+    ami_id           = coalesce(each.value["ami_id"], each.value["platform"] == "windows" ? local.default_ami_id_windows : local.default_ami_id_linux)
     root_volume_size = lookup(each.value, "root_volume_size", null)
     instance_type    = each.value["instance_type"]
 
