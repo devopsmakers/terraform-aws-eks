@@ -19,7 +19,6 @@ This submodule is designed for use by both the parent `eks` module and by the us
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| attach\_worker\_cni\_policy | Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster. | `bool` | `true` | no |
 | attach\_worker\_groups\_cni\_policy | Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default node groups IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster. | `bool` | `true` | no |
 | cluster\_name | Name of parent cluster. | `string` | n/a | yes |
 | cluster\_security\_group\_id | If provided, the EKS cluster will be attached to this security group. If not given, a security group will be created with necessary ingress/egress to work with the workers | `string` | n/a | yes |
@@ -42,6 +41,7 @@ This submodule is designed for use by both the parent `eks` module and by the us
 | worker\_groups\_additional\_policies | Additional policies to be added to node groups. | `list(string)` | `[]` | no |
 | worker\_groups\_defaults | Map of values to be applied to all node groups. See documentation above for more details. | `any` | `{}` | no |
 | worker\_groups\_role\_name | User defined node groups role name. | `string` | `""` | no |
+| worker\_security\_group\_id | If provided, all workers will be attached to this security group. If not given, a security group will be created with necessary ingress/egress to work with the EKS cluster. | `string` | `""` | no |
 | worker\_sg\_ingress\_from\_port | Minimum port number from which pods will accept communication. Must be changed to a lower value if some pods in your cluster will expose a port lower than 1025 (e.g. 22, 80, or 443). | `number` | `1025` | no |
 | workers\_additional\_policies | Additional policies to be added to workers | `list(string)` | `[]` | no |
 | workers\_role\_name | User defined workers role name. | `string` | `""` | no |
@@ -51,5 +51,17 @@ This submodule is designed for use by both the parent `eks` module and by the us
 | Name | Description |
 |------|-------------|
 | aws\_auth\_roles | Roles for use in aws-auth ConfigMap |
+| worker\_iam\_instance\_profile\_arns | default IAM instance profile ARN for EKS worker groups |
+| worker\_iam\_instance\_profile\_names | default IAM instance profile name for EKS worker groups |
+| worker\_iam\_role\_arn | default IAM role ARN for EKS worker groups |
+| worker\_iam\_role\_name | default IAM role name for EKS worker groups |
+| worker\_security\_group\_id | Security group ID attached to the EKS workers. |
+| workers\_asg\_arns | IDs of the autoscaling groups containing workers. |
+| workers\_asg\_names | Names of the autoscaling groups containing workers. |
+| workers\_default\_ami\_id | ID of the default worker group AMI |
+| workers\_launch\_template\_arns | ARNs of the worker launch templates. |
+| workers\_launch\_template\_ids | IDs of the worker launch templates. |
+| workers\_launch\_template\_latest\_versions | Latest versions of the worker launch templates. |
+| workers\_user\_data | User data of worker groups |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

@@ -121,12 +121,6 @@ variable "workers_additional_policies" {
   default     = []
 }
 
-variable "attach_worker_cni_policy" {
-  description = "Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster."
-  type        = bool
-  default     = true
-}
-
 variable "vpc_id" {
   description = "VPC where the cluster and workers will be deployed."
   type        = string
@@ -147,4 +141,10 @@ variable "worker_sg_ingress_from_port" {
   description = "Minimum port number from which pods will accept communication. Must be changed to a lower value if some pods in your cluster will expose a port lower than 1025 (e.g. 22, 80, or 443)."
   type        = number
   default     = 1025
+}
+
+variable "worker_security_group_id" {
+  description = "If provided, all workers will be attached to this security group. If not given, a security group will be created with necessary ingress/egress to work with the EKS cluster."
+  type        = string
+  default     = ""
 }

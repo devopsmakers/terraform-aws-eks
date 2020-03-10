@@ -8,8 +8,7 @@ locals {
     )
   ]
 
-  default_iam_role_id = concat(aws_iam_role.workers.*.id, [""])[0]
-
+  default_iam_role_id    = concat(aws_iam_role.worker_groups.*.id, [""])[0]
   default_ami_id_linux   = data.aws_ami.eks_worker.id
   default_ami_id_windows = data.aws_ami.eks_worker_windows.id
 
@@ -79,6 +78,7 @@ locals {
   ) if var.create_eks }
 
   worker_groups_expanded_for_sg = var.worker_create_security_group ? local.worker_groups_expanded : {}
+  worker_security_group_id      = var.worker_create_security_group ? join("", values(aws_security_group.worker_groups).*.id) : var.worker_security_group_id
 
   worker_groups_expanded_for_iam_resource = var.manage_worker_iam_resources ? local.worker_groups_expanded : {}
   worker_groups_expanded_for_iam_data     = var.manage_worker_iam_resources ? {} : local.worker_groups_expanded

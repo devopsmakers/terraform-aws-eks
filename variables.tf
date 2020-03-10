@@ -96,8 +96,8 @@ variable "worker_groups" {
   default     = []
 }
 
-variable "workers_group_defaults" {
-  description = "Override default values for target groups. See workers_group_defaults_defaults in local.tf for valid keys."
+variable "worker_groups_defaults" {
+  description = "Override default values for target groups. See worker_group_defaults in local.tf for valid keys."
   type        = any
   default     = {}
 }
@@ -150,7 +150,13 @@ variable "worker_sg_ingress_from_port" {
   default     = 1025
 }
 
-variable "workers_additional_policies" {
+variable "worker_groups_additional_policies" {
+  description = "Additional policies to be added to workers"
+  type        = list(string)
+  default     = []
+}
+
+variable "node_groups_additional_policies" {
   description = "Additional policies to be added to workers"
   type        = list(string)
   default     = []
@@ -264,19 +270,37 @@ variable "cluster_iam_role_name" {
   default     = ""
 }
 
-variable "manage_worker_iam_resources" {
+variable "manage_worker_groups_iam_resources" {
   description = "Whether to let the module manage worker IAM resources. If set to false, iam_instance_profile_name must be specified for workers."
   type        = bool
   default     = true
 }
 
-variable "workers_role_name" {
+variable "manage_node_groups_iam_resources" {
+  description = "Whether to let the module manage worker IAM resources. If set to false, iam_instance_profile_name must be specified for workers."
+  type        = bool
+  default     = true
+}
+
+variable "worker_groups_role_name" {
   description = "User defined workers role name."
   type        = string
   default     = ""
 }
 
-variable "attach_worker_cni_policy" {
+variable "node_groups_role_name" {
+  description = "User defined workers role name."
+  type        = string
+  default     = ""
+}
+
+variable "attach_worker_groups_cni_policy" {
+  description = "Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster."
+  type        = bool
+  default     = true
+}
+
+variable "attach_node_groups_cni_policy" {
   description = "Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-node` DaemonSet pods via another method or nodes will not be able to join the cluster."
   type        = bool
   default     = true
