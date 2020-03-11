@@ -4,6 +4,11 @@ variable "create_eks" {
   default     = true
 }
 
+variable "cluster_endpoint" {
+  description = "Endpoint for the EKS cluster."
+  type        = string
+}
+
 variable "manage_aws_auth" {
   description = "Whether to apply the aws-auth configmap file."
   default     = true
