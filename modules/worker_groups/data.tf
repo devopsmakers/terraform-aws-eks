@@ -1,13 +1,13 @@
 locals {
-  worker_ami_name_filter = var.worker_ami_name_filter != "" ? var.worker_ami_name_filter : "amazon-eks-node-${data.aws_eks_cluster.cluster.version}-v*"
+  worker_ami_name_filter = var.worker_ami_name_filter != "" ? var.worker_ami_name_filter : "amazon-eks-node-${data.aws_eks_cluster.this.version}-v*"
 
   # Windows nodes are available from k8s 1.14. If cluster version is less than 1.14, fix ami filter to some constant to not fail on 'terraform plan'.
   worker_ami_name_filter_windows = (var.worker_ami_name_filter_windows != "" ?
-    var.worker_ami_name_filter_windows : "Windows_Server-2019-English-Core-EKS_Optimized-${tonumber(data.aws_eks_cluster.cluster.version) >= 1.14 ? data.aws_eks_cluster.cluster.version : 1.14}-*"
+    var.worker_ami_name_filter_windows : "Windows_Server-2019-English-Core-EKS_Optimized-${tonumber(data.aws_eks_cluster.this.version) >= 1.14 ? data.aws_eks_cluster.this.version : 1.14}-*"
   )
 }
 
-data "aws_eks_cluster" "cluster" {
+data "aws_eks_cluster" "this" {
   name = var.cluster_name
 }
 
@@ -68,8 +68,8 @@ data "template_file" "launch_template_userdata" {
   vars = merge({
     platform             = each.value["platform"]
     cluster_name         = var.cluster_name
-    endpoint             = data.aws_eks_cluster.cluster.endpoint
-    cluster_auth_base64  = data.aws_eks_cluster.cluster.certificate_authority.0.data
+    endpoint             = data.aws_eks_cluster.this.endpoint
+    cluster_auth_base64  = data.aws_eks_cluster.this.certificate_authority.0.data
     pre_userdata         = each.value["pre_userdata"]
     additional_userdata  = each.value["additional_userdata"]
     bootstrap_extra_args = each.value["bootstrap_extra_args"]
