@@ -84,9 +84,10 @@ module "aws_auth" {
 
   map_instances = concat(module.worker_groups.aws_auth_roles, module.node_groups.aws_auth_roles)
 
-  create_eks      = var.create_eks
-  manage_aws_auth = var.manage_aws_auth
-  map_accounts    = var.map_accounts
-  map_roles       = var.map_roles
-  map_users       = var.map_users
+  create_eks           = var.create_eks
+  manage_aws_auth      = var.manage_aws_auth
+  map_accounts         = var.map_accounts
+  map_roles            = var.map_roles
+  map_users            = var.map_users
+  wait_for_cluster_cmd = var.wait_for_cluster_cmd
 }
