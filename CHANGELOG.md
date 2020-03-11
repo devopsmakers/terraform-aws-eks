@@ -2,6 +2,12 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+<a name="v10.0.1"></a>
+## [v10.0.1] - 2020-03-11
+### 🐛 Bug Fixes
+- [d856d03](https://github.com/devopsmakers/terraform-aws-eks/commit/d856d03) Add wait_for_cluster to aws_auth module
+
+
 <a name="v10.0.0"></a>
 ## [v10.0.0] - 2020-03-10
 ### ✨ Features
@@ -16,6 +22,7 @@
 ### 🔧 Maintenance
 - [f2a4434](https://github.com/devopsmakers/terraform-aws-eks/commit/f2a4434) Add initial submodule files
 - [05b7d54](https://github.com/devopsmakers/terraform-aws-eks/commit/05b7d54) Update README with intention
+- **release:** [ef0cbc4](https://github.com/devopsmakers/terraform-aws-eks/commit/ef0cbc4) Update changelog for v10.0.0
 - **release:** [df29db6](https://github.com/devopsmakers/terraform-aws-eks/commit/df29db6) Update changelog for v10.0.0
 - **release:** [565ab90](https://github.com/devopsmakers/terraform-aws-eks/commit/565ab90) Update changelog for v9.0.2
 
@@ -26,5 +33,6 @@
 - [6338f6d](https://github.com/devopsmakers/terraform-aws-eks/commit/6338f6d) Initial commit
 
 
-[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.0...HEAD
+[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.1...HEAD
+[v10.0.1]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.0...v10.0.1
 [v10.0.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v9.1.0...v10.0.0
