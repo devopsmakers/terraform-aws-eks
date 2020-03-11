@@ -2,10 +2,19 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+<a name="v10.0.3"></a>
+## [v10.0.3] - 2020-03-11
+### 🐛 Bug Fixes
+- [ae728e4](https://github.com/devopsmakers/terraform-aws-eks/commit/ae728e4) Pass in cluster_endpoint
+
+
 <a name="v10.0.2"></a>
 ## [v10.0.2] - 2020-03-11
 ### 🐛 Bug Fixes
 - [addaae3](https://github.com/devopsmakers/terraform-aws-eks/commit/addaae3) Pass wait_for_cluster_cmd from parent module
+
+### 🔧 Maintenance
+- **release:** [4a6bfcf](https://github.com/devopsmakers/terraform-aws-eks/commit/4a6bfcf) Update changelog for v10.0.2
 
 
 <a name="v10.0.1"></a>
@@ -42,7 +51,8 @@
 - [6338f6d](https://github.com/devopsmakers/terraform-aws-eks/commit/6338f6d) Initial commit
 
 
-[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.2...HEAD
+[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.3...HEAD
+[v10.0.3]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.2...v10.0.3
 [v10.0.2]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.1...v10.0.2
 [v10.0.1]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.0...v10.0.1
 [v10.0.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v9.1.0...v10.0.0
