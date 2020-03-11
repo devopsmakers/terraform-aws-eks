@@ -2,10 +2,19 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+<a name="v10.0.2"></a>
+## [v10.0.2] - 2020-03-11
+### 🐛 Bug Fixes
+- [addaae3](https://github.com/devopsmakers/terraform-aws-eks/commit/addaae3) Pass wait_for_cluster_cmd from parent module
+
+
 <a name="v10.0.1"></a>
 ## [v10.0.1] - 2020-03-11
 ### 🐛 Bug Fixes
 - [d856d03](https://github.com/devopsmakers/terraform-aws-eks/commit/d856d03) Add wait_for_cluster to aws_auth module
+
+### 🔧 Maintenance
+- **release:** [83a62c8](https://github.com/devopsmakers/terraform-aws-eks/commit/83a62c8) Update changelog for v10.0.1
 
 
 <a name="v10.0.0"></a>
@@ -33,6 +42,7 @@
 - [6338f6d](https://github.com/devopsmakers/terraform-aws-eks/commit/6338f6d) Initial commit
 
 
-[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.1...HEAD
+[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.2...HEAD
+[v10.0.2]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.1...v10.0.2
 [v10.0.1]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.0...v10.0.1
 [v10.0.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v9.1.0...v10.0.0
