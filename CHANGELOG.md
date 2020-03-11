@@ -2,10 +2,19 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+<a name="v10.1.0"></a>
+## [v10.1.0] - 2020-03-11
+### ✨ Features
+- [7b2d414](https://github.com/devopsmakers/terraform-aws-eks/commit/7b2d414) Add encryption_config capabilities, default to EKS v1.15
+
+
 <a name="v10.0.3"></a>
 ## [v10.0.3] - 2020-03-11
 ### 🐛 Bug Fixes
 - [ae728e4](https://github.com/devopsmakers/terraform-aws-eks/commit/ae728e4) Pass in cluster_endpoint
+
+### 🔧 Maintenance
+- **release:** [5a8de60](https://github.com/devopsmakers/terraform-aws-eks/commit/5a8de60) Update changelog for v10.0.3
 
 
 <a name="v10.0.2"></a>
@@ -51,7 +60,8 @@
 - [6338f6d](https://github.com/devopsmakers/terraform-aws-eks/commit/6338f6d) Initial commit
 
 
-[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.3...HEAD
+[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.1.0...HEAD
+[v10.1.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.3...v10.1.0
 [v10.0.3]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.2...v10.0.3
 [v10.0.2]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.1...v10.0.2
 [v10.0.1]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.0...v10.0.1
