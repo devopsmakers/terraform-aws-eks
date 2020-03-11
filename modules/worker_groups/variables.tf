@@ -5,7 +5,7 @@ variable "create_eks" {
 }
 
 variable "cluster_name" {
-  description = "Name of parent cluster."
+  description = "Name of the parent EKS cluster."
   type        = string
 }
 

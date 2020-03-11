@@ -5,12 +5,16 @@ data "template_file" "map_instances" {
   vars = var.map_instances[count.index]
 }
 
+data "aws_eks_cluster" "this" {
+  name = var.cluster_name
+}
+
 resource "null_resource" "wait_for_cluster" {
   count = var.create_eks && var.manage_aws_auth ? 1 : 0
 
   provisioner "local-exec" {
     environment = {
-      ENDPOINT = var.cluster_endpoint
+      ENDPOINT = data.aws_eks_cluster.this.endpoint
     }
 
     command = var.wait_for_cluster_cmd

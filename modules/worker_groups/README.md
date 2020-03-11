@@ -20,7 +20,7 @@ This submodule is designed for use by both the parent `eks` module and by the us
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
 | attach\_worker\_cni\_policy | Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker groups IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-worker` DaemonSet pods via another method or workers will not be able to join the cluster. | `bool` | `true` | no |
-| cluster\_name | Name of parent cluster. | `string` | n/a | yes |
+| cluster\_name | Name of the parent EKS cluster. | `string` | n/a | yes |
 | cluster\_security\_group\_id | If provided, the EKS cluster will be attached to this security group. If not given, a security group will be created with necessary ingress/egress to work with the workers | `string` | n/a | yes |
 | create\_eks | Controls if EKS resources should be created (it affects almost all resources). | `bool` | `true` | no |
 | iam\_path | If provided, all IAM roles will be created on this path. | `string` | `"/"` | no |

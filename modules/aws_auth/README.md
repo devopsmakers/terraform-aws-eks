@@ -5,6 +5,7 @@
 
 | Name | Version |
 |------|---------|
+| aws | >= 2.52.0 |
 | kubernetes | >= 1.6.2 |
 | null | >= 2.1 |
 | template | >= 2.1 |
@@ -13,7 +14,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| cluster\_endpoint | Endpoint for the EKS cluster. | `string` | n/a | yes |
+| cluster\_name | Name of the EKS cluster. | `string` | n/a | yes |
 | create\_eks | Controls if EKS resources should be created (it affects almost all resources). | `bool` | `true` | no |
 | manage\_aws\_auth | Whether to apply the aws-auth configmap file. | `bool` | `true` | no |
 | map\_accounts | Additional AWS account numbers to add to the aws-auth configmap. See examples/basic/variables.tf for example format. | `list(string)` | `[]` | no |
