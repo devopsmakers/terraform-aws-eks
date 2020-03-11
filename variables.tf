@@ -28,7 +28,7 @@ variable "cluster_security_group_id" {
 variable "cluster_version" {
   description = "Kubernetes version to use for the EKS cluster."
   type        = string
-  default     = "1.14"
+  default     = "1.15"
 }
 
 variable "config_output_path" {
@@ -334,4 +334,16 @@ variable "eks_oidc_root_ca_thumbprint" {
   type        = string
   description = "Thumbprint of Root CA for EKS OIDC, Valid until 2037"
   default     = "9e99a48a9960b14926bb7f3b02e22da2b0ab7280"
+}
+
+variable "cluster_encryption_key_arn" {
+  type        = string
+  description = "KMS Key ARN to encrypt EKS secrets with."
+  default     = ""
+}
+
+variable "cluster_encryption_resources" {
+  type        = list(string)
+  description = "A list of the EKS resources to encrypt."
+  default     = ["secrets"]
 }

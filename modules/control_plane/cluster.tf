@@ -22,6 +22,17 @@ resource "aws_eks_cluster" "this" {
     public_access_cidrs     = var.cluster_endpoint_public_access_cidrs
   }
 
+  dynamic encryption_config {
+    for_each = toset(var.cluster_encryption_key_arn != "" ? ["encryption_enabled"] : [])
+
+    content {
+      provider {
+        key_arn = var.cluster_encryption_key_arn
+      }
+      resources = var.cluster_encryption_resources
+    }
+  }
+
   timeouts {
     create = var.cluster_create_timeout
     delete = var.cluster_delete_timeout

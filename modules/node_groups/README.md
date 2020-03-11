@@ -28,7 +28,7 @@ This submodule is designed for use by both the parent `eks` module and by the us
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.44.0 |
+| aws | >= 2.52.0 |
 | random | >= 2.1 |
 
 ## Inputs

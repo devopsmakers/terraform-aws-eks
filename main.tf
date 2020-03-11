@@ -5,6 +5,8 @@ module "control_plane" {
   cluster_create_timeout                       = var.cluster_create_timeout
   cluster_delete_timeout                       = var.cluster_delete_timeout
   cluster_enabled_log_types                    = var.cluster_enabled_log_types
+  cluster_encryption_key_arn                   = var.cluster_encryption_key_arn
+  cluster_encryption_resources                 = var.cluster_encryption_resources
   cluster_endpoint_private_access              = var.cluster_endpoint_private_access
   cluster_endpoint_public_access               = var.cluster_endpoint_public_access
   cluster_endpoint_public_access_cidrs         = var.cluster_endpoint_public_access_cidrs
