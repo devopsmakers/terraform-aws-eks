@@ -2,10 +2,19 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+<a name="v10.2.0"></a>
+## [v10.2.0] - 2020-03-12
+### 🐛 Bug Fixes
+- [7491eb9](https://github.com/devopsmakers/terraform-aws-eks/commit/7491eb9) worker group security group id output
+
+
 <a name="v10.1.1"></a>
 ## [v10.1.1] - 2020-03-11
 ### 🐛 Bug Fixes
 - [19f40b1](https://github.com/devopsmakers/terraform-aws-eks/commit/19f40b1) Use cluster_name rather than cluster_endpoint for consistency
+
+### 🔧 Maintenance
+- **release:** [a697d89](https://github.com/devopsmakers/terraform-aws-eks/commit/a697d89) Update changelog for v10.1.1
 
 
 <a name="v10.1.0"></a>
@@ -69,7 +78,8 @@
 - [6338f6d](https://github.com/devopsmakers/terraform-aws-eks/commit/6338f6d) Initial commit
 
 
-[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.1.1...HEAD
+[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.0...HEAD
+[v10.2.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.1.1...v10.2.0
 [v10.1.1]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.1.0...v10.1.1
 [v10.1.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.3...v10.1.0
 [v10.0.3]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.2...v10.0.3
