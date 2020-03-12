@@ -43,9 +43,9 @@ output "workers_launch_template_latest_versions" {
   value       = values(aws_launch_template.worker_groups).*.latest_version
 }
 
-output "worker_security_group_id" {
-  description = "Security group ID attached to the EKS workers."
-  value       = local.worker_security_group_id
+output "worker_security_group_ids" {
+  description = "Security group IDs attached to the EKS workers. A map of worker_group names to IDs, or the user provided security group ID string."
+  value       = local.worker_security_group_ids
 }
 
 output "worker_iam_instance_profile_arns" {

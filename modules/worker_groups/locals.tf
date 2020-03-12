@@ -80,7 +80,7 @@ locals {
     v,
   ) if var.create_eks }
 
-  worker_security_group_id = var.worker_create_security_group ? join("", values(aws_security_group.worker_groups).*.id) : var.worker_security_group_id
+  worker_security_group_ids = var.worker_create_security_group ? { for k, v in aws_security_group.worker_groups : k => v.id } : var.worker_security_group_id
 
   policy_arn_prefix = contains(["cn-northwest-1", "cn-north-1"], data.aws_region.current.name) ? "arn:aws-cn:iam::aws:policy" : "arn:aws:iam::aws:policy"
 
