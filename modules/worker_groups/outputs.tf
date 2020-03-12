@@ -44,7 +44,7 @@ output "workers_launch_template_latest_versions" {
 }
 
 output "worker_security_group_ids" {
-  description = "Security group IDs attached to the EKS workers. A map of worker_group names to IDs, or the user provided security group ID string."
+  description = "Security group IDs attached to the EKS workers. An object mapping worker_group names to IDs, or `default` to the user supplied security group ID."
   value       = local.worker_security_group_ids
 }
 
