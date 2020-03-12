@@ -2,10 +2,19 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+<a name="v10.2.1"></a>
+## [v10.2.1] - 2020-03-12
+### 🐛 Bug Fixes
+- [3f81efb](https://github.com/devopsmakers/terraform-aws-eks/commit/3f81efb) Add missing security group rule to allow workers to communicate with the cluster API
+
+
 <a name="v10.2.0"></a>
 ## [v10.2.0] - 2020-03-12
 ### 🐛 Bug Fixes
 - [7491eb9](https://github.com/devopsmakers/terraform-aws-eks/commit/7491eb9) worker group security group id output
+
+### 🔧 Maintenance
+- **release:** [919c4a0](https://github.com/devopsmakers/terraform-aws-eks/commit/919c4a0) Update changelog for v10.2.0
 
 
 <a name="v10.1.1"></a>
@@ -78,7 +87,8 @@
 - [6338f6d](https://github.com/devopsmakers/terraform-aws-eks/commit/6338f6d) Initial commit
 
 
-[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.0...HEAD
+[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.1...HEAD
+[v10.2.1]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.0...v10.2.1
 [v10.2.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.1.1...v10.2.0
 [v10.1.1]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.1.0...v10.1.1
 [v10.1.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.0.3...v10.1.0
