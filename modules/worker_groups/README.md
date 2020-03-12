@@ -54,7 +54,7 @@ This submodule is designed for use by both the parent `eks` module and by the us
 | worker\_iam\_instance\_profile\_names | default IAM instance profile name for EKS worker groups |
 | worker\_iam\_role\_arn | default IAM role ARN for EKS worker groups |
 | worker\_iam\_role\_name | default IAM role name for EKS worker groups |
-| worker\_security\_group\_ids | Security group IDs attached to the EKS workers. An object mapping worker\_group names to IDs, or `default` to the user supplied security group ID. |
+| worker\_security\_group\_id | Security group ID attached to the EKS workers. |
 | workers\_asg\_arns | IDs of the autoscaling groups containing workers. |
 | workers\_asg\_names | Names of the autoscaling groups containing workers. |
 | workers\_default\_ami\_id | ID of the default worker group AMI |

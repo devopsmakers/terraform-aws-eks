@@ -125,7 +125,7 @@ resource "aws_launch_template" "worker_groups" {
     associate_public_ip_address = each.value["public_ip"]
     delete_on_termination       = each.value["eni_delete"]
     security_groups = flatten([
-      try(aws_security_group.worker_groups[each.key].id, ""),
+      local.worker_security_group_id,
       var.worker_additional_security_group_ids,
       each.value["additional_security_group_ids"],
     ])
@@ -217,26 +217,25 @@ resource "aws_iam_instance_profile" "worker_groups" {
 }
 
 resource "aws_security_group" "worker_groups" {
-  for_each = var.worker_create_security_group ? local.worker_groups_expanded : {}
+  count = var.worker_create_security_group && var.create_eks ? 1 : 0
 
-  name_prefix = "${var.cluster_name}-${coalesce(each.value["name"], each.key)}"
-  description = "Security group for ${coalesce(each.value["name"], each.key)} workers in the cluster."
+  name_prefix = var.cluster_name
+  description = "Security group for all workers in the cluster."
   vpc_id      = var.vpc_id
   tags = merge(
     var.tags,
     {
-      "Name"                                      = "${var.cluster_name}-${coalesce(each.value["name"], each.key)}-workers-sg"
+      "Name"                                      = "${var.cluster_name}-${coalesce(each.value["name"], each.key)}-eks_workers_sg"
       "kubernetes.io/cluster/${var.cluster_name}" = "owned"
     },
   )
 }
 
 resource "aws_security_group_rule" "workers_egress_internet" {
-  for_each = var.worker_create_security_group ? local.worker_groups_expanded : {}
-
-  description       = "Allow workers ${coalesce(each.value["name"], each.key)} egress to the Internet."
+  count             = var.worker_create_security_group && var.create_eks ? 1 : 0
+  description       = "Allow nodes all egress to the Internet."
   protocol          = "-1"
-  security_group_id = aws_security_group.worker_groups[each.key].id
+  security_group_id = local.worker_security_group_id
   cidr_blocks       = ["0.0.0.0/0"]
   from_port         = 0
   to_port           = 0
@@ -244,48 +243,44 @@ resource "aws_security_group_rule" "workers_egress_internet" {
 }
 
 resource "aws_security_group_rule" "workers_ingress_self" {
-  for_each = var.worker_create_security_group ? local.worker_groups_expanded : {}
-
-  description              = "Allow ${coalesce(each.value["name"], each.key)} workers to communicate with each other."
+  count                    = var.worker_create_security_group && var.create_eks ? 1 : 0
+  description              = "Allow node to communicate with each other."
   protocol                 = "-1"
-  security_group_id        = aws_security_group.worker_groups[each.key].id
-  source_security_group_id = aws_security_group.worker_groups[each.key].id
+  security_group_id        = local.worker_security_group_id
+  source_security_group_id = local.worker_security_group_id
   from_port                = 0
   to_port                  = 65535
   type                     = "ingress"
 }
 
 resource "aws_security_group_rule" "workers_ingress_cluster" {
-  for_each = var.worker_create_security_group ? local.worker_groups_expanded : {}
-
-  description              = "Allow ${coalesce(each.value["name"], each.key)} workers to receive communication from the cluster control plane."
+  count                    = var.worker_create_security_group && var.create_eks ? 1 : 0
+  description              = "Allow workers pods to receive communication from the cluster control plane."
   protocol                 = "tcp"
-  security_group_id        = aws_security_group.worker_groups[each.key].id
-  source_security_group_id = var.cluster_security_group_id
+  security_group_id        = local.worker_security_group_id
+  source_security_group_id = local.cluster_security_group_id
   from_port                = var.worker_sg_ingress_from_port
   to_port                  = 65535
   type                     = "ingress"
 }
 
 resource "aws_security_group_rule" "workers_ingress_cluster_kubelet" {
-  for_each = var.worker_create_security_group ? local.worker_groups_expanded : {}
-
-  description              = "Allow ${coalesce(each.value["name"], each.key)} worker Kubelets to receive communication from the cluster control plane."
+  count                    = var.worker_create_security_group && var.create_eks ? var.worker_sg_ingress_from_port > 10250 ? 1 : 0 : 0
+  description              = "Allow workers Kubelets to receive communication from the cluster control plane."
   protocol                 = "tcp"
-  security_group_id        = aws_security_group.worker_groups[each.key].id
+  security_group_id        = local.worker_security_group_id
   source_security_group_id = var.cluster_security_group_id
   from_port                = 10250
   to_port                  = 10250
   type                     = "ingress"
 }
 
-resource "aws_security_group_rule" "cluster_https_worker_ingress" {
-  for_each = var.worker_create_security_group ? local.worker_groups_expanded : {}
-
-  description              = "Allow ${coalesce(each.value["name"], each.key)} workers to communicate with the EKS cluster API."
+resource "aws_security_group_rule" "workers_ingress_cluster_https" {
+  count                    = var.worker_create_security_group && var.create_eks ? 1 : 0
+  description              = "Allow pods running extension API servers on port 443 to receive communication from cluster control plane."
   protocol                 = "tcp"
-  security_group_id        = var.cluster_security_group_id
-  source_security_group_id = aws_security_group.worker_groups[each.key].id
+  security_group_id        = local.worker_security_group_id
+  source_security_group_id = var.cluster_security_group_id
   from_port                = 443
   to_port                  = 443
   type                     = "ingress"
