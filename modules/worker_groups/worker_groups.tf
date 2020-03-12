@@ -225,7 +225,7 @@ resource "aws_security_group" "worker_groups" {
   tags = merge(
     var.tags,
     {
-      "Name"                                      = "${var.cluster_name}-${coalesce(each.value["name"], each.key)}-eks_workers_sg"
+      "Name"                                      = "${var.cluster_name}-eks_workers_sg"
       "kubernetes.io/cluster/${var.cluster_name}" = "owned"
     },
   )
