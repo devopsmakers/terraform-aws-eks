@@ -258,7 +258,7 @@ resource "aws_security_group_rule" "workers_ingress_cluster" {
   description              = "Allow workers pods to receive communication from the cluster control plane."
   protocol                 = "tcp"
   security_group_id        = local.worker_security_group_id
-  source_security_group_id = local.cluster_security_group_id
+  source_security_group_id = var.cluster_security_group_id
   from_port                = var.worker_sg_ingress_from_port
   to_port                  = 65535
   type                     = "ingress"
