@@ -217,7 +217,7 @@ resource "aws_iam_instance_profile" "worker_groups" {
 }
 
 resource "aws_security_group" "worker_groups" {
-  count = var.worker_create_security_group && var.create_eks ? 1 : 0
+  count = local.worker_create_security_group ? 1 : 0
 
   name_prefix = var.cluster_name
   description = "Security group for all workers in the cluster."
@@ -232,7 +232,7 @@ resource "aws_security_group" "worker_groups" {
 }
 
 resource "aws_security_group_rule" "workers_egress_internet" {
-  count             = var.worker_create_security_group && var.create_eks ? 1 : 0
+  count             = local.worker_create_security_group ? 1 : 0
   description       = "Allow nodes all egress to the Internet."
   protocol          = "-1"
   security_group_id = local.worker_security_group_id
@@ -243,7 +243,7 @@ resource "aws_security_group_rule" "workers_egress_internet" {
 }
 
 resource "aws_security_group_rule" "workers_ingress_self" {
-  count                    = var.worker_create_security_group && var.create_eks ? 1 : 0
+  count                    = local.worker_create_security_group ? 1 : 0
   description              = "Allow node to communicate with each other."
   protocol                 = "-1"
   security_group_id        = local.worker_security_group_id
@@ -254,7 +254,7 @@ resource "aws_security_group_rule" "workers_ingress_self" {
 }
 
 resource "aws_security_group_rule" "workers_ingress_cluster" {
-  count                    = var.worker_create_security_group && var.create_eks ? 1 : 0
+  count                    = local.worker_create_security_group ? 1 : 0
   description              = "Allow workers pods to receive communication from the cluster control plane."
   protocol                 = "tcp"
   security_group_id        = local.worker_security_group_id
@@ -265,7 +265,7 @@ resource "aws_security_group_rule" "workers_ingress_cluster" {
 }
 
 resource "aws_security_group_rule" "workers_ingress_cluster_kubelet" {
-  count                    = var.worker_create_security_group && var.create_eks ? var.worker_sg_ingress_from_port > 10250 ? 1 : 0 : 0
+  count                    = local.worker_create_security_group ? var.worker_sg_ingress_from_port > 10250 ? 1 : 0 : 0
   description              = "Allow workers Kubelets to receive communication from the cluster control plane."
   protocol                 = "tcp"
   security_group_id        = local.worker_security_group_id
@@ -276,7 +276,7 @@ resource "aws_security_group_rule" "workers_ingress_cluster_kubelet" {
 }
 
 resource "aws_security_group_rule" "workers_ingress_cluster_https" {
-  count                    = var.worker_create_security_group && var.create_eks ? 1 : 0
+  count                    = local.worker_create_security_group ? 1 : 0
   description              = "Allow pods running extension API servers on port 443 to receive communication from cluster control plane."
   protocol                 = "tcp"
   security_group_id        = local.worker_security_group_id
@@ -287,7 +287,7 @@ resource "aws_security_group_rule" "workers_ingress_cluster_https" {
 }
 
 resource "aws_security_group_rule" "cluster_https_workers_ingress" {
-  count                    = var.worker_create_security_group && var.create_eks ? 1 : 0
+  count                    = local.worker_create_security_group ? 1 : 0
   description              = "Allow pods to communicate with the EKS cluster API."
   protocol                 = "tcp"
   security_group_id        = var.cluster_security_group_id

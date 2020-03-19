@@ -12,6 +12,8 @@ locals {
   default_ami_id_linux   = data.aws_ami.eks_worker.id
   default_ami_id_windows = data.aws_ami.eks_worker_windows.id
 
+  worker_create_security_group = var.worker_create_security_group && var.create_eks
+
   worker_groups_defaults = {
     name                          = ""                        # Name of the worker group. Literal count.index will never be used but if name is not set, the count.index interpolation will be used.
     tags                          = []                        # A list of map defining extra tags to be applied to the worker group autoscaling group.
@@ -80,7 +82,7 @@ locals {
     v,
   ) if var.create_eks }
 
-  worker_security_group_id = var.worker_create_security_group ? aws_security_group.worker_groups.0.id : var.worker_security_group_id
+  worker_security_group_id = local.worker_create_security_group ? aws_security_group.worker_groups.0.id : var.worker_security_group_id
 
   policy_arn_prefix = contains(["cn-northwest-1", "cn-north-1"], data.aws_region.current.name) ? "arn:aws-cn:iam::aws:policy" : "arn:aws:iam::aws:policy"
 
