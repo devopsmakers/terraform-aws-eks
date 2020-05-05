@@ -2,10 +2,20 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+<a name="v10.2.2"></a>
+## [v10.2.2] - 2020-05-05
+### 🐛 Bug Fixes
+- [5000dda](https://github.com/devopsmakers/terraform-aws-eks/commit/5000dda) iam_instance_profile_name empty when manage_worker_iam_resources=false
+- **worker_groups:** [c1ae5c1](https://github.com/devopsmakers/terraform-aws-eks/commit/c1ae5c1) index error when create_eks is false ([#3](https://github.com/devopsmakers/terraform-aws-eks/issues/3))
+
+
 <a name="v10.2.1"></a>
 ## [v10.2.1] - 2020-03-12
 ### 🐛 Bug Fixes
 - [3f81efb](https://github.com/devopsmakers/terraform-aws-eks/commit/3f81efb) Add missing security group rule to allow workers to communicate with the cluster API
+
+### 🔧 Maintenance
+- **release:** [a0fcf8a](https://github.com/devopsmakers/terraform-aws-eks/commit/a0fcf8a) Update changelog for v10.2.1
 
 
 <a name="v10.2.0"></a>
@@ -87,7 +97,8 @@
 - [6338f6d](https://github.com/devopsmakers/terraform-aws-eks/commit/6338f6d) Initial commit
 
 
-[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.1...HEAD
+[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.2...HEAD
+[v10.2.2]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.1...v10.2.2
 [v10.2.1]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.0...v10.2.1
 [v10.2.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.1.1...v10.2.0
 [v10.1.1]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.1.0...v10.1.1
