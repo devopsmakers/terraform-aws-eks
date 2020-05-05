@@ -133,8 +133,9 @@ resource "aws_launch_template" "worker_groups" {
 
   iam_instance_profile {
     name = coalescelist(
-      var.manage_worker_iam_resources ? list(aws_iam_instance_profile.worker_groups[each.key].name) : list(""),
-      var.manage_worker_iam_resources ? list("") : list(data.aws_iam_instance_profile.custom_worker_group_launch_template_iam_instance_profile[each.key].name)
+      var.manage_worker_iam_resources ? [aws_iam_instance_profile.worker_groups[each.key].name] : [],
+      var.manage_worker_iam_resources ? [] : [data.aws_iam_instance_profile.custom_worker_group_launch_template_iam_instance_profile[each.key].name],
+      [""]
     )[0]
   }
 
