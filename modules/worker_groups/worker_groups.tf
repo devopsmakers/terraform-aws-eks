@@ -161,9 +161,13 @@ resource "aws_launch_template" "worker_groups" {
     enabled = each.value["enable_monitoring"]
   }
 
-  placement {
-    tenancy    = each.value["launch_template_placement_tenancy"]
-    group_name = each.value["launch_template_placement_group"]
+  dynamic "placement" {
+    for_each = each.value["launch_template_placement_group"] != null ? [each.value["launch_template_placement_group"]] : []
+
+    content {
+      tenancy    = each.value["launch_template_placement_tenancy"]
+      group_name = placement.value
+    }
   }
 
   dynamic "instance_market_options" {
