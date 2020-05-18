@@ -2,11 +2,20 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+<a name="v10.2.3"></a>
+## [v10.2.3] - 2020-05-18
+### 🐛 Bug Fixes
+- [377e8a5](https://github.com/devopsmakers/terraform-aws-eks/commit/377e8a5) issue with placement groups ([#5](https://github.com/devopsmakers/terraform-aws-eks/issues/5))
+
+
 <a name="v10.2.2"></a>
 ## [v10.2.2] - 2020-05-05
 ### 🐛 Bug Fixes
 - [5000dda](https://github.com/devopsmakers/terraform-aws-eks/commit/5000dda) iam_instance_profile_name empty when manage_worker_iam_resources=false
 - **worker_groups:** [c1ae5c1](https://github.com/devopsmakers/terraform-aws-eks/commit/c1ae5c1) index error when create_eks is false ([#3](https://github.com/devopsmakers/terraform-aws-eks/issues/3))
+
+### 🔧 Maintenance
+- **release:** [a5be1d5](https://github.com/devopsmakers/terraform-aws-eks/commit/a5be1d5) Update changelog for v10.2.2
 
 
 <a name="v10.2.1"></a>
@@ -97,7 +106,8 @@
 - [6338f6d](https://github.com/devopsmakers/terraform-aws-eks/commit/6338f6d) Initial commit
 
 
-[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.2...HEAD
+[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.3...HEAD
+[v10.2.3]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.2...v10.2.3
 [v10.2.2]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.1...v10.2.2
 [v10.2.1]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.0...v10.2.1
 [v10.2.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.1.1...v10.2.0
