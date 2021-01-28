@@ -7,25 +7,33 @@ This submodule is designed for use by both the parent `eks` module and by the us
 `worker_groups` is a map of maps. Key of first level will be used as unique value for `for_each` resources and in the `aws_autoscaling_group` and `aws_launch_template` name. Inner map can take the below values.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.9 |
+| aws | >= 2.52.0 |
+| random | >= 2.1 |
+| template | >= 2.1 |
+
 ## Providers
 
 | Name | Version |
 |------|---------|
 | aws | >= 2.52.0 |
-| random | >= 2.1 |
 | template | >= 2.1 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | attach\_worker\_cni\_policy | Whether to attach the Amazon managed `AmazonEKS_CNI_Policy` IAM policy to the default worker groups IAM role. WARNING: If set `false` the permissions must be assigned to the `aws-worker` DaemonSet pods via another method or workers will not be able to join the cluster. | `bool` | `true` | no |
 | cluster\_name | Name of the parent EKS cluster. | `string` | n/a | yes |
 | cluster\_security\_group\_id | If provided, the EKS cluster will be attached to this security group. If not given, a security group will be created with necessary ingress/egress to work with the workers | `string` | n/a | yes |
 | create\_eks | Controls if EKS resources should be created (it affects almost all resources). | `bool` | `true` | no |
 | iam\_path | If provided, all IAM roles will be created on this path. | `string` | `"/"` | no |
 | manage\_worker\_iam\_resources | Whether to let the module manage worker IAM resources. If set to false, iam\_instance\_profile\_name must be specified for workers. | `bool` | `true` | no |
-| permissions\_boundary | If provided, all IAM roles will be created with this permissions boundary attached. | `string` | n/a | yes |
+| permissions\_boundary | If provided, all IAM roles will be created with this permissions boundary attached. | `string` | `null` | no |
 | subnets | A list of subnets to place the EKS cluster and workers within. | `list(string)` | n/a | yes |
 | tags | A map of tags to add to all resources. | `map(string)` | n/a | yes |
 | vpc\_id | VPC where the cluster and workers will be deployed. | `string` | n/a | yes |

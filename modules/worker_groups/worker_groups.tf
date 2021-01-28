@@ -3,16 +3,7 @@
 resource "aws_autoscaling_group" "worker_groups" {
   for_each = local.worker_groups_expanded
 
-  name_prefix = join(
-    "-",
-    compact(
-      [
-        var.cluster_name,
-        coalesce(each.value["name"], each.key),
-        each.value["recreate_on_change"] ? random_pet.worker_groups[each.key].id : ""
-      ]
-    )
-  )
+  name_prefix = "${var.cluster_name}-${each.key}"
 
   desired_capacity          = each.value["desired_capacity"]
   max_size                  = each.value["max_size"]
@@ -91,7 +82,7 @@ resource "aws_autoscaling_group" "worker_groups" {
     [
       {
         "key"                 = "Name"
-        "value"               = "${var.cluster_name}-${coalesce(each.value["name"], each.key)}-eks_asg"
+        "value"               = "${var.cluster_name}-${each.key}-eks_asg"
         "propagate_at_launch" = true
       },
       {
@@ -119,7 +110,7 @@ resource "aws_autoscaling_group" "worker_groups" {
 resource "aws_launch_template" "worker_groups" {
   for_each = local.worker_groups_expanded
 
-  name_prefix = "${var.cluster_name}-${coalesce(each.value["name"], each.key)}"
+  name_prefix = "${var.cluster_name}-${each.key}"
 
   network_interfaces {
     associate_public_ip_address = each.value["public_ip"]
@@ -198,7 +189,7 @@ resource "aws_launch_template" "worker_groups" {
 
       tags = merge(
         {
-          "Name"                                      = "${var.cluster_name}-${coalesce(each.value["name"], each.key)}-eks_asg",
+          "Name"                                      = "${var.cluster_name}-${each.key}-eks_asg",
           "kubernetes.io/cluster/${var.cluster_name}" = "owned",
         },
         var.tags,
@@ -216,7 +207,7 @@ resource "aws_launch_template" "worker_groups" {
 resource "aws_iam_instance_profile" "worker_groups" {
   for_each = var.manage_worker_iam_resources ? local.worker_groups_expanded : {}
 
-  name_prefix = "${var.cluster_name}-${coalesce(each.value["name"], each.key)}"
+  name_prefix = "${var.cluster_name}-${each.key}"
   role        = each.value["iam_role_id"]
   path        = var.iam_path
 }

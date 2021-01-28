@@ -15,7 +15,6 @@ locals {
   worker_create_security_group = var.worker_create_security_group && var.create_eks
 
   worker_groups_defaults = {
-    name                          = ""                        # Name of the worker group. Literal count.index will never be used but if name is not set, the count.index interpolation will be used.
     tags                          = []                        # A list of map defining extra tags to be applied to the worker group autoscaling group.
     ami_id                        = ""                        # AMI ID for the eks workers. If none is provided, Terraform will search for the latest version of their EKS optimized worker AMI based on platform.
     desired_capacity              = "1"                       # Desired worker capacity in the autoscaling group and changing its value will not affect the autoscaling group's desired capacity because the cluster-autoscaler manages up and down scaling of the nodes. Cluster-autoscaler add nodes when pods are in pending state and remove the nodes when they are not required by modifying the desirec_capacity of the autoscaling group. Although an issue exists in which if the value of the min_size is changed it modifies the value of desired_capacity.
@@ -23,7 +22,6 @@ locals {
     min_size                      = "1"                       # Minimum worker capacity in the autoscaling group. NOTE: Change in this paramater will affect the desired_capacity, like changing its value to 2 will change desired_capacity value to 2 but bringing back it to 1 will not affect the desired_capacity.
     force_delete                  = false                     # Enable forced deletion for the autoscaling group.
     initial_lifecycle_hooks       = []                        # Initital lifecycle hook for the autoscaling group.
-    recreate_on_change            = false                     # Recreate the autoscaling group when the Launch Template or Launch Configuration change.
     default_cooldown              = null                      # The amount of time, in seconds, after a scaling activity completes before another scaling activity can start.
     health_check_grace_period     = null                      # Time in seconds after instance comes into service before checking health.
     instance_type                 = "m4.large"                # Size of the workers instances.
