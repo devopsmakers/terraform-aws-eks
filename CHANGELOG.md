@@ -2,10 +2,19 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+<a name="v11.0.0"></a>
+## [v11.0.0] - 2021-01-28
+### ✨ Features
+- [626b4ef](https://github.com/devopsmakers/terraform-aws-eks/commit/626b4ef) remove automatic ASG replacement and support for name overrides
+
+
 <a name="v10.2.3"></a>
 ## [v10.2.3] - 2020-05-18
 ### 🐛 Bug Fixes
 - [377e8a5](https://github.com/devopsmakers/terraform-aws-eks/commit/377e8a5) issue with placement groups ([#5](https://github.com/devopsmakers/terraform-aws-eks/issues/5))
+
+### 🔧 Maintenance
+- **release:** [dee493a](https://github.com/devopsmakers/terraform-aws-eks/commit/dee493a) Update changelog for v10.2.3
 
 
 <a name="v10.2.2"></a>
@@ -106,7 +115,8 @@
 - [6338f6d](https://github.com/devopsmakers/terraform-aws-eks/commit/6338f6d) Initial commit
 
 
-[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.3...HEAD
+[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v11.0.0...HEAD
+[v11.0.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.3...v11.0.0
 [v10.2.3]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.2...v10.2.3
 [v10.2.2]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.1...v10.2.2
 [v10.2.1]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.0...v10.2.1
