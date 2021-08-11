@@ -2,10 +2,19 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+<a name="v11.0.1"></a>
+## [v11.0.1] - 2021-08-11
+### 🔧 Maintenance
+- [b5d8e49](https://github.com/devopsmakers/terraform-aws-eks/commit/b5d8e49) Bump to allow terraform 1.0.X
+
+
 <a name="v11.0.0"></a>
-## [v11.0.0] - 2021-01-28
+## [v11.0.0] - 2021-02-15
 ### ✨ Features
 - [626b4ef](https://github.com/devopsmakers/terraform-aws-eks/commit/626b4ef) remove automatic ASG replacement and support for name overrides
+
+### 🔧 Maintenance
+- **release:** [d1e8c08](https://github.com/devopsmakers/terraform-aws-eks/commit/d1e8c08) Update changelog for v11.0.0
 
 
 <a name="v10.2.3"></a>
@@ -115,7 +124,8 @@
 - [6338f6d](https://github.com/devopsmakers/terraform-aws-eks/commit/6338f6d) Initial commit
 
 
-[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v11.0.0...HEAD
+[Unreleased]: https://github.com/devopsmakers/terraform-aws-eks/compare/v11.0.1...HEAD
+[v11.0.1]: https://github.com/devopsmakers/terraform-aws-eks/compare/v11.0.0...v11.0.1
 [v11.0.0]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.3...v11.0.0
 [v10.2.3]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.2...v10.2.3
 [v10.2.2]: https://github.com/devopsmakers/terraform-aws-eks/compare/v10.2.1...v10.2.2
