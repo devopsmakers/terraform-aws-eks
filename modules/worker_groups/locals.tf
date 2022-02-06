@@ -73,6 +73,10 @@ locals {
     spot_allocation_strategy                 = "lowest-price" # Valid options are 'lowest-price' and 'capacity-optimized'. If 'lowest-price', the Auto Scaling group launches instances using the Spot pools with the lowest price, and evenly allocates your instances across the number of Spot pools. If 'capacity-optimized', the Auto Scaling group launches instances using Spot pools that are optimally chosen based on the available Spot capacity.
     spot_instance_pools                      = 10             # "Number of Spot pools per availability zone to allocate capacity. EC2 Auto Scaling selects the cheapest Spot pools and evenly allocates Spot capacity across the number of Spot pools that you specify."
     spot_max_price                           = ""             # Maximum price per unit hour that the user is willing to pay for the Spot instances. Default is the on-demand price
+    http_endpoint               = "disabled" # Whether the metadata service is available
+    http_tokens                 = "optional" # Whether or not the metadata service requires session tokens
+    http_put_response_hop_limit = 1 # The desired HTTP PUT response hop limit for instance metadata requests
+    instance_metadata_tags = "disabled" # Enables or disables access to instance tags from the instance metadata service
   }
 
   # Merge defaults and per-group values to make code cleaner
