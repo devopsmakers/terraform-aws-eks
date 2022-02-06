@@ -205,7 +205,12 @@ resource "aws_launch_template" "worker_groups" {
       )
     }
   }
-
+  metadata_options {
+    http_endpoint               = each.value["http_endpoint"]
+    http_tokens                 = each.value["http_tokens"]
+    http_put_response_hop_limit = each.value["http_put_response_hop_limit"]
+    instance_metadata_tags      = each.value["instance_metadata_tags"]
+  }
   tags = var.tags
 
   lifecycle {
