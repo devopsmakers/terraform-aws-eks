@@ -32,7 +32,7 @@ resource "aws_autoscaling_group" "worker_groups" {
 
   dynamic "mixed_instances_policy" {
     iterator = item
-    for_each = (lookup(each.value, "override_instance_types", null) != null) || (lookup(each.value, "on_demand_allocation_strategy", null) != null) ? tolist(each.value) : []
+    for_each = (lookup(each.value, "override_instance_types", null) != null) || (lookup(each.value, "on_demand_allocation_strategy", null) != null) ? tolist([each.value]) : []
 
     content {
       instances_distribution {
@@ -66,7 +66,7 @@ resource "aws_autoscaling_group" "worker_groups" {
 
   dynamic "launch_template" {
     iterator = item
-    for_each = (lookup(each.value, "override_instance_types", null) != null) || (lookup(each.value, "on_demand_allocation_strategy", null) != null) ? [] : tolist(each.value)
+    for_each = (lookup(each.value, "override_instance_types", null) != null) || (lookup(each.value, "on_demand_allocation_strategy", null) != null) ? [] : tolist([each.value])
 
     content {
       id      = aws_launch_template.worker_groups[each.key].id
@@ -171,7 +171,7 @@ resource "aws_launch_template" "worker_groups" {
   }
 
   dynamic "instance_market_options" {
-    for_each = lookup(each.value, "market_type", null) == null ? [] : tolist(lookup(each.value, "market_type", null))
+    for_each = lookup(each.value, "market_type", null) == null ? [] : list(lookup(each.value, "market_type", null))
     content {
       market_type = instance_market_options.value
     }
