@@ -88,7 +88,7 @@ variable "worker_ami_owner_id" {
 variable "worker_ami_owner_id_windows" {
   description = "The ID of the owner for the AMI to use for the AWS EKS Windows workers. Valid values are an AWS account ID, 'self' (the current account), or an AWS owner alias (e.g. 'amazon', 'aws-marketplace', 'microsoft')."
   type        = string
-  default     = "801119661308" // The ID of the owner of the official AWS EKS Windows AMIs.
+  default     = "402743460324" // The ID of the owner of the official AWS EKS Windows AMIs.
 }
 
 variable "manage_worker_iam_resources" {
